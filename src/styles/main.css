@@ -3,87 +3,91 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #fc1e8a;
+  background: linear-gradient(160deg, #1e1e2f, #3a1c71, #d76d77, #ffaf7b);
+  font-family: "Press Start 2P", cursive;
   user-select: none;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
 }
 
+/* === CONTAINER PRINCIPAL === */
 .container {
-  position: relative;
+  background: #1f1f2b;
+  padding: 2rem;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  background: linear-gradient(
-    325deg,
-    #03001e 0%,
-    #7303c0 30%,
-    #ec38bc 70%,
-    #fdeff9 100%
-  );
-  padding: 40px 60px;
-}
-
-h2 {
-  font-size: 3em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.reset {
-  padding: 15px 20px;
+  gap: 2rem;
   width: 100%;
-  color: #000;
-  background-color: #fff;
-  border: none;
-  font-size: 1.5em;
-  letter-spacing: 0.1em;
+  max-width: 480px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* === TÍTULO === */
+h1 {
+  font-size: 1.75rem;
+  letter-spacing: 0.05em;
+  color: #ffffff;
   text-transform: uppercase;
+}
+
+/* === BOTÃO RESET === */
+.reset {
+  padding: 1rem;
+  background: #ff4081;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
+  transition: background 0.3s;
 }
 
+.reset:hover,
 .reset:focus {
-  color: #ec38bc;
-  background-color: #262809;
+  background: #e91e63;
+  outline: none;
 }
 
+/* === ÁREA DO JOGO === */
 .game {
-  width: 430px;
-  height: 430px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   gap: 10px;
-  transform-style: preserve-3d;
-  perspective: 500px;
+  perspective: 1000px;
 }
 
+/* === CARTAS === */
 .item {
-  position: relative;
-  width: 100px;
-  height: 100px;
+  background: #fff;
+  color: #000;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-
-  font-size: 3em;
+  border-radius: 8px;
+  height: 70px;
   transform: rotateY(180deg);
-  transition: 0.25s;
+  transition: transform 0.3s;
+  position: relative;
 }
 
+/* === FRENTE ESCONDIDA === */
 .item::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: #404040;
-  /* opacity: 0.85; */
-  transition: 0.25s;
-  transform: rotateY(0deg);
+  background: #333;
+  border-radius: 8px;
   backface-visibility: hidden;
+  transform: rotateY(0deg);
+  transition: transform 0.3s;
 }
 
+/* === ABERTURA / COMBINAÇÃO === */
 .item.boxOpen {
   transform: rotateY(0deg);
 }
@@ -91,4 +95,76 @@ h2 {
 .boxOpen::after,
 .boxMatch::after {
   transform: rotateY(180deg);
+}
+
+/* === MODAL === */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 15, 15, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  color: #333;
+  max-width: 90%;
+  width: 300px;
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+  color: #1e88e5;
+  font-size: 1.5rem;
+}
+
+.modal-content button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  background-color: #1e88e5;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.modal-content button:hover {
+  background-color: #1565c0;
+}
+
+/* === RESPONSIVO === */
+@media (min-width: 600px) {
+  .game {
+    grid-template-columns: repeat(4, 100px);
+  }
+
+  .item {
+    height: 100px;
+    font-size: 2.5rem;
+  }
+
+  .container {
+    max-width: 560px;
+  }
+
+  .reset {
+    font-size: 1.2rem;
+  }
 }

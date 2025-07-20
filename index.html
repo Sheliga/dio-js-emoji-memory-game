@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo da Memória</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogo Da Memória</title>
-  <link rel="stylesheet" href="./src/styles/reset.css">
-  <link rel="stylesheet" href="./src/styles/main.css">
-</head>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="./src/styles/reset.css" />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+  </head>
 
-<body>
-  <div class="container">
-    <h2>JOGO DA MEMÓRIA</h2>
-    <div class="game"></div>
-    <button class="reset" onclick="window.location.reload()">RESET GAME</button>
-  </div>
+  <body>
+    <main class="container" role="main" aria-label="Jogo da Memória">
+      <h1>Jogo da Memória</h1>
 
-  <script src="./src/scripts/engine.js" defer></script>
-</body>
+      <section class="game" aria-label="Área do jogo"></section>
 
+      <button class="reset" id="resetButton" aria-label="Reiniciar o jogo">
+        Resetar Jogo
+      </button>
+    </main>
+    <div id="winModal" class="modal">
+      <div class="modal-content">
+        <h2>🎉 Você venceu!</h2>
+        <button onclick="closeModal()">Fechar</button>
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script src="./src/scripts/engine.js" defer></script>
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        const resetButton = document.getElementById("resetButton");
+        resetButton.addEventListener("click", () => window.location.reload());
+      });
+    </script>
+  </body>
 </html>
